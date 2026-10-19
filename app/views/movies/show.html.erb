@@ -1,0 +1,14 @@
+<div class="detail-topline"><%= link_to "← Back to movie shelf", movies_path, class: "back-link" %></div>
+<article class="detail-card">
+  <p class="eyebrow">Movie details</p>
+  <h1><%= @movie.title %></h1>
+  <div class="detail-meta">
+    <span class="rating-pill"><%= @movie.rating.presence || "Unrated" %></span>
+    <span><%= @movie.release_date&.strftime("%B %-d, %Y") || "Release date unknown" %></span>
+  </div>
+  <div class="description-block">
+    <h2>About this film</h2>
+    <p><%= @movie.description.presence || "No description has been added yet." %></p>
+  </div>
+  <div class="button-row"><%= link_to "Edit movie", edit_movie_path(@movie), class: "button button-primary" %><%= link_to "All movies", movies_path, class: "button button-quiet" %></div>
+</article>

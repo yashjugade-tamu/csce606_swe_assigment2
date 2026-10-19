@@ -1,0 +1,49 @@
+<section class="page-heading">
+  <div>
+    <p class="eyebrow">Your personal collection</p>
+    <h1>Movie shelf</h1>
+    <p class="lede">Browse, sort, and keep track of the films worth remembering.</p>
+  </div>
+  <%= link_to "Add a movie", new_movie_path, class: "button button-primary" %>
+</section>
+
+<section class="panel table-panel" aria-label="Movies">
+  <% if @movies.any? %>
+    <table class="movie-table">
+      <thead>
+        <tr>
+          <% [["title", "Title"], ["rating", "Rating"], ["release_date", "Release date"]].each do |column, label| %>
+            <% active = @sort_column == column %>
+            <% next_direction = active && @sort_direction == "asc" ? "desc" : "asc" %>
+            <th scope="col" class="<%= active ? "sorted sorted-#{@sort_direction}" : "" %>">
+              <%= link_to movies_path(sort: column, direction: next_direction), class: "sort-link", "aria-label": "Sort by #{label} #{next_direction == "asc" ? "ascending" : "descending"}" do %>
+                <%= label %><% if active %><span class="sort-cue" aria-hidden="true"><%= @sort_direction == "asc" ? "▲" : "▼" %></span><span class="sr-only"> sorted <%= @sort_direction == "asc" ? "ascending" : "descending" %></span><% end %>
+              <% end %>
+            </th>
+          <% end %>
+          <th scope="col" class="actions-heading">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr>
+            <th scope="row"><%= link_to movie.title, movie_path(movie), class: "movie-title" %></th>
+            <td><span class="rating-pill"><%= movie.rating.presence || "Unrated" %></span></td>
+            <td><%= movie.release_date&.strftime("%b %-d, %Y") || "Unknown" %></td>
+            <td class="row-actions"><%= link_to "Edit", edit_movie_path(movie) %><%= button_to "Delete", movie_path(movie), method: :delete, form: { class: "inline-form", data: { turbo_confirm: "Delete #{movie.title}?" } }, class: "text-button" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="4"><%= pluralize(@movies.size, "movie") %> in your shelf</td></tr>
+      </tfoot>
+    </table>
+  <% else %>
+    <div class="empty-state">
+      <p class="empty-icon" aria-hidden="true">✦</p>
+      <h2>Your shelf is waiting</h2>
+      <p>Add a movie to start building your collection.</p>
+      <%= link_to "Add your first movie", new_movie_path, class: "button button-primary" %>
+    </div>
+  <% end %>
+</section>

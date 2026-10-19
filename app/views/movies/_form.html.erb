@@ -1,0 +1,15 @@
+<%= form_with model: movie, class: "movie-form" do |form| %>
+  <% if movie.errors.any? %>
+    <div class="error-box" role="alert">
+      <h2><%= pluralize(movie.errors.count, "error") %> stopped this movie from saving:</h2>
+      <ul><% movie.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>
+    </div>
+  <% end %>
+  <div class="field"><%= form.label :title %><%= form.text_field :title, required: true, autofocus: true, placeholder: "e.g. Spirited Away" %></div>
+  <div class="form-grid">
+    <div class="field"><%= form.label :rating %><%= form.select :rating, options_for_select(Movie::RATINGS, movie.rating), { include_blank: "Choose a rating" } %></div>
+    <div class="field"><%= form.label :release_date %><%= form.date_field :release_date, required: true %></div>
+  </div>
+  <div class="field"><%= form.label :description %><%= form.text_area :description, rows: 5, placeholder: "What makes this one memorable?" %></div>
+  <div class="button-row"><%= form.submit(movie.persisted? ? "Save changes" : "Add movie", class: "button button-primary") %><%= link_to "Cancel", movies_path, class: "button button-quiet" %></div>
+<% end %>

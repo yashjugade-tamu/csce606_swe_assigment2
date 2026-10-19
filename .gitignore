@@ -1,0 +1,11 @@
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+/storage/*
+!/storage/.keep
+/vendor/bundle
+/coverage
+/db/*.sqlite3
+/db/*.sqlite3-*
+/config/master.key

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Rotten Potatoes · Movie shelf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+  <body>
+    <header class="site-header">
+      <%= link_to "Rotten Potatoes", root_path, class: "brand" %>
+      <span class="header-note">A tiny, opinionated movie shelf</span>
+    </header>
+    <main class="page-shell">
+      <% if notice %><p class="flash flash-notice" role="status"><%= notice %></p><% end %>
+      <% if alert %><p class="flash flash-alert" role="alert"><%= alert %></p><% end %>
+      <%= yield %>
+    </main>
+    <footer class="site-footer">Keep the popcorn close.</footer>
+  </body>
+</html>
