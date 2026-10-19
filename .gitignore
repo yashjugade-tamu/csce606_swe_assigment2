@@ -6,6 +6,7 @@
 !/storage/.keep
 /vendor/bundle
 /coverage
+/public/assets
 /db/*.sqlite3
 /db/*.sqlite3-*
 /config/master.key
