@@ -35,5 +35,5 @@ Render's free web services spin down after inactivity, so the first request afte
 - The index table has semantic header, body, and footer sections and omits descriptions.
 - Title, rating, and release date sort in both directions. The active column is highlighted, and a text/screen-reader cue announces the direction.
 - Sort state persists in the Rails session while navigating away from and back to the index.
-- The seed file includes ten movies and is idempotent.
+- The seed file includes Pirates of the Caribbean, Avatar, and Harry Potter, and is safe to rerun.
 - No CSS framework is used.
